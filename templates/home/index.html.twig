@@ -1,0 +1,37 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}accueil
+{% endblock %}
+
+
+{% block body %}
+
+	<!-- Tous produits -->
+
+	<div class="container mt-5  ">
+
+		
+
+
+		<div class="row row-cols-1 row-cols-sm-2 row-cols-md-4 g-4 ">
+			{% for montre in montres %}
+				<div class="col">
+					<div class="card watch-card text-center bg-light border-0">
+						<img src="{{asset('images/photos_montres/' ~ montre.image )}}" 
+						     class="card-img-top mx-auto d-block img-fluid" {# j'ai ajouté la classe "img-fluid" pour rendre l'image automatiquement responsive et centrée #}
+							 alt="{{montre.marque}}"/>
+						<div class="card-body  text-center">
+							<h6 class="card-title">{{montre.marque}}</h6>
+							<p class="card-text">{{ montre.description|slice(0, 80) }}</p>
+							<p class="text-primary fw-blod">{{montre.prix}} €</p><!-- " fw-blod " pour rendre le texte en gras -->
+							<a href="{{ path('app_montre_show', {'id': montre.id}) }}" class="btn btn-outline-dark btn-sm">Voir</a>
+						</div>
+					</div>
+				</div>
+
+			{% else %}
+				<p>Acune montre trouvée</p>
+			{% endfor %}
+		</div>
+	</div>
+{% endblock %}

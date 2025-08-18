@@ -1,0 +1,30 @@
+#titre {
+    font-size: 2rem;
+    font-weight: bold;
+    text-align: center;
+    font-family: "georgia", serif;
+    text-shadow: 2px 2px 4px rgba(210, 133, 133, 1);
+}
+
+
+
+
+
+#titre {
+
+/*--affiche l'élément en ligne tout en permettant d'appliquer des styles de bloc--*/
+  display: inline-block;
+
+/*--applique une animation appelée 'bounce' avec une durée de 0.6 secondes, qui se répète à l'infini avec des mouvements alternés--*/
+  animation: bounce 0.6s infinite alternate;
+}
+
+/*--je définis une animation avec @keyframes--*/
+@keyframes bounce {
+    
+/*--a 0%, l'élément est à sa position d'origine (pas de décalage vertical)--*/
+  0% { transform: translateY(0); }
+
+/*--100% signifie la fin de l'animation--*/
+  100% { transform: translateY(-5px); }
+}

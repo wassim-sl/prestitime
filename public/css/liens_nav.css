@@ -1,0 +1,13 @@
+.navbar .nav-link {
+  color: #333; /*--couleur normale--*/
+
+  /*--applique une transition fluide pour la couleur du texte et la bordure inférieure--*/
+  transition: color 0.3s ease, border-bottom 0.3s ease;
+
+   /*--Change la bordure inférieure pour la rendre visible et lui appliquer la couleur définie au survol--*/
+  border-bottom: 2px solid transparent; /* ligne invisible */
+}
+.navbar .nav-link:hover {
+  color: #b53a5a; /* couleur au survol */
+  border-bottom: 2px solid #b53a5a; /* ligne visible au survol */
+}

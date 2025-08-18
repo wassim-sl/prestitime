@@ -1,0 +1,76 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Nos montres
+{% endblock %}
+{% block main_banner %}{% endblock %}
+
+{% block body %}
+	<div class="container mt-5 mb-5">
+
+		<br>
+		<h1 class="text-center">Listes des montres</h1>
+
+		<br>
+		<a class="btn btn-dark" href="{{ path('app_montre_new') }}">Ajouter un produit</a><br><br>
+
+		
+			<table class="table table-hover table-bordered align-middle ">
+				<thead class="table-dark">
+					<tr class="text-center">
+						<th>Id</th>
+						<th>Categorie</th>
+						<th>Marque</th>
+						<th>Description</th>
+						<th>Prix (€)</th>
+						<th>Image</th>
+						<th>Activation</th>
+
+						<th>actions</th>
+					</tr>
+				</thead>
+				<tbody>
+					{% for montre in montres %}
+						<tr class="text-center">
+							<td>{{ montre.id }}</td>
+							<td>{{ montre.categorie }}</td>
+							<td>{{ montre.marque }}</td>
+							<td>{{ montre.description }}</td>
+							<td>{{ montre.prix }}</td>
+							<td>{{ montre.image }}</td>
+							<td>
+								{% if montre.isActive %}
+									<span style="color: green;">⬤</span>
+								{% else %}
+									<span style="color: red;">⬤</span>
+
+								{% endif %}
+							</td>
+
+							<td>
+								{# Fiche complète #}
+								<a href="{{ path('app_montre_show', {'id': montre.id }) }}" class="text-decoration-none">
+									{{ ux_icon('lucide:file', {'class':'text-warning sizeSvg20'}) }}
+								</a>
+
+								{# Modifier #}
+								<a href="{{ path('app_montre_edit', {'id': montre.id }) }}" class="text-decoration-none">
+									{{ ux_icon('lucide:edit', {'class':'text-info sizeSvg20'}) }}
+								</a>
+
+								{# Supprimer #}
+								<a href="{{ path('app_montre_delete', {'id': montre.id }) }}" class="text-decoration-none" onclick="return confirm('êtes-vous sûr de vouloir supprimer ce produit ?')">
+									{{ ux_icon('lucide:trash-2', {'class':'text-danger sizeSvg20'}) }}
+								</a>
+							</td>
+
+						</tr>
+					{% else %}
+						<tr>
+							<td colspan="6">Aucune montre trouvée</td>
+						</tr>
+					{% endfor %}
+				</tbody>
+			</table>
+		
+	</div>
+{% endblock %}

@@ -1,0 +1,57 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Nos Marques
+{% endblock %}
+
+{% block main_banner %}{% endblock %}
+
+{% block body %}
+<div class="container mt-5 mb-5">
+
+	<br>
+		<h1 class="text-center ">Liste des marques</h1><br>
+
+	<a class="btn btn-dark" href="{{ path('app_marque_new') }}">Créer une nouvelle marque</a>
+	<br><br>
+
+	<table class="table table-hover table-bordered align-middle">
+		<thead class="table-dark">
+			<tr class="text-center">
+				<th>Id</th>
+				<th>Nom</th>
+				<th>actions</th>
+			</tr>
+		</thead>
+		<tbody>
+			{% for marque in marques %}
+				<tr class="text-center">
+					<td>{{ marque.id }}</td>
+					<td>{{ marque.nom }}</td>
+					<td>
+							{# Fiche complète #}
+							<a href="{{ path('app_marque_show', {'id': marque.id }) }}" class="text-decoration-none">
+								{{ ux_icon('lucide:file', {'class':'text-warning sizeSvg20'}) }}
+							</a>
+
+							{# Modifier #}
+							<a href="{{ path('app_marque_edit', {'id': marque.id }) }}" class="text-decoration-none">
+								{{ ux_icon('lucide:edit', {'class':'text-info sizeSvg20'}) }}
+							</a>
+
+							{# Supprimer #}
+							<a href="{{ path('app_marque_delete', {'id': marque.id }) }}" class="text-decoration-none" onclick="return confirm('êtes-vous sûr de vouloir supprimer ce produit ?')">
+								{{ ux_icon('lucide:trash-2', {'class':'text-danger sizeSvg20'}) }}
+							</a>
+						</td>
+
+				</tr>
+			{% else %}
+				<tr class="text-center">
+					<td colspan="3">Aucune marque trouvée</td>
+				</tr>
+			{% endfor %}
+		</tbody>
+	</table>
+
+</div>	
+{% endblock %}

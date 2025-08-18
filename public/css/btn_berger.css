@@ -1,0 +1,56 @@
+/*---- 
+
+les breakPoint de bootstrap :
+Extra small	None        <576px
+Small	sm	            ≥576px
+Medium	md	            ≥768px
+Large	lg	            ≥992px
+Extra large	xl	        ≥1200px
+Extra extra large	xxl	≥1400px
+
+----*/
+
+
+@media (max-width: 768px) {
+    .navbar-collapse {
+        position: absolute;
+        top: 100%;
+        left: 0;
+        right: 0;
+        z-index: 1;
+        background: #f8f9fa;
+        padding: 0.5rem 1rem;
+    }
+}
+
+
+/* mobile (< 992px) : menu burger */
+@media (max-width: 768px) {
+    /*--nav plus compacte--*/
+    .navbar {
+        padding-top: 0.25rem;
+        padding-bottom: 0.25rem;
+    }
+
+    /*--logo un peu plus petit--*/
+    .brand-logo {
+        height: 80px;
+    }
+
+    /*--quand le menu est ouvert, mets un fond et de l’espace--*/
+    .navbar-collapse {
+        background: rgba(249, 202, 202, 1);
+        padding: 0.5rem 1rem;
+        border-radius: 0.25rem;
+    }
+
+    /*--liens plus faciles à cliquer--*/
+    .navbar-nav .nav-link {
+        padding: 0.5rem 0;
+        font-size: 1rem;
+    }
+
+    .navbar-toggler {
+        border: none;
+    }
+}

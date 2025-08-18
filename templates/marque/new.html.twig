@@ -1,0 +1,17 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Nouveau marque{% endblock %}
+{% block  main_banner %}{% endblock %}
+
+
+{% block body %}
+	<div class="container mt-5 mb-5">
+		<div class=" border-0">
+			<h1 class="mb-4 text-center">Crée une nouvelle marque</h1>
+		</div>
+		<div>
+		<a class="btn btn-dark mb-3" href="{{ path('app_marque_index') }}">Géstion des marques</a>
+		</div>   
+    {{ include('marque/_form.html.twig') }}
+
+{% endblock %}

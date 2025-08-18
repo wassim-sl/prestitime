@@ -1,0 +1,81 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}
+	{{ montre.marque }}
+	-
+	{{ montre.categorie }}
+{% endblock %}
+
+{% block main_banner %}{% endblock %}
+{% block body %}
+	<div style="max-width: 900px; margin: auto; padding: 20px; margin-top:20px; background:rgba(255, 241, 241, 0.9); " class="card " ;>
+
+		<h1 style="text-align: center; margin-bottom: 30px; color: rgba(209, 139, 139, 0.9);">
+			<strong>
+				{{ montre.marque }}
+				-
+				{{ montre.categorie }}</strong>
+		</h1>
+
+		<div
+			style="display: flex; gap: 20px; flex-wrap: wrap; justify-content: center;">
+
+			<!-- Images -->
+			<div
+				style="flex: 1; text-align: center;">
+				<!-- Image principale -->
+				{% if montre.image %}
+					<img id="main-image" src="{{ asset('images/photos_montres/' ~ montre.image) }}" alt="Photo principale" style="max-width: 250px; border-radius: 8px;">
+				{% endif %}
+
+				
+				<div style="display: flex; gap: 10px; margin-top: 10px; justify-content: center;">
+					{% if montre.image %}
+						<img src="{{ asset('images/photos_montres/' ~ montre.image) }}" alt="Photo 1" class="mini" width="70" style="border-radius: 4px; cursor: pointer;">
+					{% endif %}
+					{% if montre.image2 %}
+						<img src="{{ asset('images/photos_montres/' ~ montre.image2) }}" alt="Photo 2" class="mini" width="70" style="border-radius: 4px; cursor: pointer;">
+					{% endif %}
+					{% if montre.image3 %}
+						<img src="{{ asset('images/photos_montres/' ~ montre.image3) }}" alt="Photo 3" class="mini" width="70" style="border-radius: 4px; cursor: pointer;">
+					{% endif %}
+
+				</div>
+			</div>
+
+			<!-- Infos produit -->
+			<div style="flex: 1;">
+				<p>
+					<strong>Description :</strong><br>{{ montre.description }}
+				</p>
+				<p>
+					<strong>Prix :</strong>
+					<span>{{ montre.prix }}
+						€</span>
+				</p>
+				<p>
+					<strong>Disponibilité :</strong>
+					{% if montre.isActive %}
+						<span style="color: green;">✅ Disponible</span>
+					{% else %}
+						<span style="color: red;">❌ Indisponible</span>
+					{% endif %}
+				</p>
+				<div style="margin-top: 20px;">
+					<a href="{{ path('app_home') }}" style="margin-right: 10px; text-decoration: none; padding: 8px 12px; background: #6c757d; color: #fff; border-radius: 4px;">← Retour</a>
+					<a href="{{ path('app_home') }}" style="margin-right: 10px; text-decoration: none; padding: 8px 12px; background: #6c757d; color: #fff; border-radius: 4px;">Ajouté au paniee</a>
+
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<!-- JS pour changer l’image -->
+	<script>
+		document.querySelectorAll('.mini').forEach(function(img) {
+			img.addEventListener('click', function() {
+				document.getElementById('main-image').src = this.src;
+				});
+		});
+	</script>
+{% endblock %}

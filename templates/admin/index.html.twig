@@ -1,0 +1,49 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Admin{% endblock %}
+{% block main_banner %}{% endblock %}
+
+
+{% block body %}
+<div class="container py-5">
+    <h1 style="color: rgba(210, 133, 133, 1)" class="mb-4 text-center fw-bold fst-italic ">Tableau d'administration</h1><br>
+
+    <div class="row">
+        <div class="col-md-6 mb-4">
+            <div class="card shadow-sm rounded-3">
+                <div class="card-body">
+                    <h3 class="card-title text-center">Montres</h3>
+                    <a href="{{ path('app_montre_index') }}" class="btn btn-primary mt-2 w-100">Tous les montres</a>
+                    <a href="{{ path('app_montre_new') }}" class="btn btn-outline-primary mt-2 w-100">Ajouter une montre</a>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-6 mb-4">
+            <div class="card shadow-sm rounded-3">
+                <div class="card-body">
+                    <h3 class="card-title text-center">Catégories</h3>
+                    <a href="{{ path('app_categorie_index') }}" class="btn btn-success mt-2 w-100">Toutes les catégories</a>
+                    <a href="{{ path('app_categorie_new') }}" class="btn btn-outline-success mt-2 w-100">Ajouter une catégorie</a>
+                </div>
+            </div>
+        </div>
+
+       
+
+        <div class="col-md-6 mb-4">
+            <div class="card shadow-sm rounded-3">
+                <div class="card-body">
+                    <h3 class="card-title text-center">Marques</h3>
+                    <a href="{{ path('app_marque_index') }}" class="btn btn-info mt-2 w-100">Toutes les marques</a>
+                    <a href="{{ path('app_marque_new') }}" class="btn btn-outline-info mt-2 w-100">Ajouter une marque</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+
+{% endblock %}

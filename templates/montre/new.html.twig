@@ -1,0 +1,40 @@
+{% extends 'base.html.twig' %}
+{% block  main_banner %}{% endblock %}
+
+
+{% block body %}
+	<div class="container mt-5 mb-5">
+		<div class=" border-0">
+			<h1 class="mb-4 text-center">Crée une nouvelle montre</h1>
+		</div>
+		<div>
+			<a class="btn btn-dark mb-3" href="{{ path('app_montre_index') }}">Gestion des montres</a>
+		</div>
+		{{ form_start(form) }}
+
+		<div class="row mb-3">
+			<div class="col-md-6">
+				{{ form_row(form.description) }}
+			</div>
+			<div class="col-md-6">
+				{{ form_row(form.prix) }}
+			</div>
+		</div>
+
+
+		<div class="row mb-3">
+			<div class="col-md-6">
+				{{ form_row(form.categorie) }}
+			</div>
+			<div class="col-md-6">
+				{{ form_row(form.marque) }}
+			</div>
+		</div>
+
+		{{ form_rest(form) }}
+		<button type="submit" class="btn btn-dark w-100 mt-3">Ajouter une montre
+		</button>
+
+		{{ form_end(form) }}
+	</div>
+</div>{% endblock %}
