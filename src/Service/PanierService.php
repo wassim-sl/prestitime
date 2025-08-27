@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Service;                                        // Espace de noms de ton application (dossier src/Service)
+namespace App\Service;                                        // Espace de noms de mon application (dossier src/Service)
 
 use App\Entity\Montre;                                       // On va manipuler l'entité Montre (pour charger les infos depuis la BDD)
 use Doctrine\ORM\EntityManagerInterface;                     // Pour accéder au repository (find par id)
@@ -25,7 +25,7 @@ class PanierService                                          // Déclaration de 
     {
         // On récupère la clé 'panier' dans la session. Si elle n'existe pas encore, on renvoie un tableau vide [].
         return $this->session->get('panier', []);
-        // Format choisi : [ idMontre => quantite, ... ]  ex: [ 12 => 1, 45 => 2 ]
+        // Format choisi : [ idMontre => quantite ]  ex: [ 12 => 1, 45 => 2 ]
     }
 
     private function savePanier(array $panier): void          // Méthode privée : écrire le panier en session
