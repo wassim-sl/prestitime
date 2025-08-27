@@ -2,6 +2,7 @@
 
 {% block title %}Connextion
 {% endblock %}
+{% block main_banner %}{% endblock %}
 
 {% block body %}
 	<div class="container mt-5">
@@ -20,16 +21,18 @@
 				</div>
 			{% endif %}
 
-			<h1 class="h3 mb-3 font-weight-normal text-center">Connexion</h1>
+			<h1 class="h3 mb-3 font-weight-normal text-center" style="color: rgba(210, 133, 133, 1)">
+				<strong>Connexion</strong>
+			</h1>
 
 			<div>
 				<label for="inputEmail">Email</label>
 				<input type="email" value="{{ last_username }}" name="email" id="inputEmail" class="form-control" autocomplete="email" required autofocus>
 
 			</div>
-
+			<br>
 			<div>
-				<label for="inputPassword">Password</label>
+				<label for="inputPassword">Mot de passe</label>
 				<input type="password" name="password" id="inputPassword" class="form-control" autocomplete="current-password" required>
 
 			</div>
@@ -43,16 +46,19 @@
 				</label>
 			</div>
 
-			<button class="btn btn-lg btn-primary" type="submit">
+			<button class="btn btn-lg btn-success" type="submit">
 				Se connecter
 			</button>
 
 			<div class="row mt-4">
-				<div class="col-6">
-					<a class="btn btn-outline-dark w-100" href="{{ path('app_register')}}">Pas encore inscrit ?</a>
-				</div>
 				<div>
-					<a class="btn btn-outline-dark w-100" href="{{ path('app_forgot_password_request')}}">Mot de passe oublié ?</a>
+					<a class="btn btn-outline-dark w-100 w-sm-auto" href="{{ path('app_register')}}">Pas encore inscrit ?</a>
+				</div>
+				<br>
+				<br>
+
+				<div>
+					<a class="btn btn-outline-dark w-100 w-sm-auto" href="{{ path('app_forgot_password_request')}}">Mot de passe oublié ?</a>
 				</div>
 			</div>
 
