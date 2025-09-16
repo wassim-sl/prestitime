@@ -1,0 +1,31 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Résultats de recherche{% endblock %}
+
+{% block body %}
+<div class="container mt-5">
+    <h1>Résultats pour : "{{ query }}"</h1>
+
+    {% if montres is empty %}
+        <p>Aucune montre trouvée.</p>
+    {% else %}
+        <div class="row">
+            {% for montre in montres %}
+                <div class="col-md-4 mb-4">
+                    <div class="card h-100">
+                        {% if montre.image %}
+                            <img src="{{ asset('images/photos_montres/' ~ montre.image) }}" class="card-img-top" alt="{{ montre.nom }}">
+                        {% endif %}
+                        <div class="card-body">
+                            <h5 class="card-title">{{ montre.nom }}</h5>
+                            <p>{{ montre.description|slice(0,100) }}...</p>
+                            <p class="fw-bold">{{ montre.prix }} €</p>
+                            <a href="{{ path('app_montre_show', { id: montre.id }) }}" class="btn btn-primary">Voir la fiche</a>
+                        </div>
+                    </div>
+                </div>
+            {% endfor %}
+        </div>
+    {% endif %}
+</div>
+{% endblock %}

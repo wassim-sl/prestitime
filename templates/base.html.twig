@@ -27,10 +27,19 @@
 		{% block main_banner %}
 
 			<!-- Barre de recherche -->
-			<div class="text-center my-4 fw-bold  fst-italic">
-				<h1 id="titre" style="color: rgba(210, 133, 133, 1)"></h1>
-				<input type="text" class="text-center form-control w-50 mx-auto mt-3" placeholder="Recherchez une montre"/>
-			</div>
+			
+				<div class="text-center my-4 fw-bold  fst-italic">
+					<h1 id="titre" style="color: rgba(210, 133, 133, 1)"></h1>
+					<form method="get" action="{{ path('recherche') }}" class="">
+					<input type="text" 
+					       name="q"
+					       class="text-center form-control w-50 mx-auto mt-3" 
+						   placeholder="Recherchez une montre"						   
+						   />
+					<button type="submit" class="btn btn-primary ms-2" >  Rechercher </button>
+					</form>
+				</div>
+			
 
 			<!-- Banieres -->
 			<div class="container mb-5">
@@ -78,11 +87,9 @@
 			{% include "_include/_footer.html.twig" %}
 		{% endblock %}
 
-		 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-Q4VRBbNHOzqHlfm+2Ve3gCvYUIQlBF3YYt3NRmQ2sfkFDU2qZxU2RQDhqlRHRXac" crossorigin="anonymous">
-										
-										</script>
+		<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-Q4VRBbNHOzqHlfm+2Ve3gCvYUIQlBF3YYt3NRmQ2sfkFDU2qZxU2RQDhqlRHRXac" crossorigin="anonymous"></script>
 		{% block javascript %}
-			 <script src="{{asset('js/script.js')}}"></script>
+			<script src="{{asset('js/script.js')}}"></script>
 
 		{% endblock %}
 	</body>
