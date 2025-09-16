@@ -47,7 +47,7 @@ final class MontreController extends AbstractController
         ]);
     }
 
-    #[Route('/{id}', name: 'app_montre_show',requirements:['id' => '\d+'], methods: ['GET'])]
+    #[Route('/{id}', name: 'app_montre_show', requirements: ['id' => '\d+'], methods: ['GET'])]
     public function show(Montre $montre): Response
     {
         return $this->render('montre/show.html.twig', [
@@ -94,30 +94,32 @@ final class MontreController extends AbstractController
         return $this->redirectToRoute('app_montre_index'); // redirige vers la liste
     }
 
-    // Route qui gère la recherche de montres
-    // Accessible via l'URL "/recherche" et porte le nom "recherche"
-    #[Route('/recherche', name: 'recherche')]
+    #[Route('/recherche', name: 'recherche', methods: ['GET'])]
     public function recherche(Request $request, EntityManagerInterface $em): Response
     {
-        // Récupération du paramètre "q" envoyé dans l'URL (ex: /recherche?q=rolex)
-        // Si aucun paramètre n'est fourni, on met une valeur par défaut vide ''
-        $query = $request->query->get('q', '');
+        // Récupère la valeur saisie dans l'URL (ex: ?q=Rolex)
+        $query = trim($request->query->get('q', ''));
 
-        // Recherche des montres dans la base de données
-        // On utilise le QueryBuilder sur l'entité Montre
-        // On filtre les résultats en vérifiant si le nom ou la description contient la valeur recherchée
-        $montres = $em->getRepository(Montre::class)
-            ->createQueryBuilder('montre') // 'm' est un alias pour l'entité Montre
-            ->where('montre.nom LIKE :search OR montre.categorie LIKE :search') // condition de recherche
-            ->setParameter('search', "%$query%") // on entoure la requête de % pour le LIKE (recherche partielle)
-            ->getQuery() // on prépare la requête
-            ->getResult(); // on exécute et on récupère les résultats
+        // On construit une requête sur l'entité Montre
+        $qb = $em->getRepository(Montre::class)->createQueryBuilder('m')
+            // Jointure pour accéder au nom de la marque
+            ->leftJoin('m.marque', 'ma')->addSelect('ma')
+            // Jointure pour accéder au nom de la catégorie
+            ->leftJoin('m.categorie', 'ca')->addSelect('ca');
 
-        // On envoie les résultats à la vue Twig 'montre/recherche.html.twig'
-        // On transmet la liste des montres trouvées et la valeur recherchée pour éventuellement l'afficher
+        // Filtre la recherche sur marque OU catégorie si $query n’est pas vide
+        if ($query !== '') {
+            $qb->andWhere('ma.nom LIKE :q OR ca.nom LIKE :q')
+                ->setParameter('q', '%' . $query . '%'); // recherche partielle
+        }
+
+        // Exécute la requête et récupère les résultats
+        $montres = $qb->getQuery()->getResult();
+
+        // Envoie les résultats à la vue
         return $this->render('montre/recherche.html.twig', [
             'montres' => $montres,
-            'query' => $query
+            'query'   => $query,
         ]);
     }
 }
