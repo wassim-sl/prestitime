@@ -47,7 +47,7 @@ final class MontreController extends AbstractController
         ]);
     }
 
-    #[Route('/{id}', name: 'app_montre_show', methods: ['GET'])]
+    #[Route('/{id}', name: 'app_montre_show',requirements:['id' => '\d+'], methods: ['GET'])]
     public function show(Montre $montre): Response
     {
         return $this->render('montre/show.html.twig', [
@@ -93,5 +93,31 @@ final class MontreController extends AbstractController
 
         return $this->redirectToRoute('app_montre_index'); // redirige vers la liste
     }
-    
+
+    // Route qui gère la recherche de montres
+    // Accessible via l'URL "/recherche" et porte le nom "recherche"
+    #[Route('/recherche', name: 'recherche')]
+    public function recherche(Request $request, EntityManagerInterface $em): Response
+    {
+        // Récupération du paramètre "q" envoyé dans l'URL (ex: /recherche?q=rolex)
+        // Si aucun paramètre n'est fourni, on met une valeur par défaut vide ''
+        $query = $request->query->get('q', '');
+
+        // Recherche des montres dans la base de données
+        // On utilise le QueryBuilder sur l'entité Montre
+        // On filtre les résultats en vérifiant si le nom ou la description contient la valeur recherchée
+        $montres = $em->getRepository(Montre::class)
+            ->createQueryBuilder('montre') // 'm' est un alias pour l'entité Montre
+            ->where('montre.nom LIKE :search OR montre.categorie LIKE :search') // condition de recherche
+            ->setParameter('search', "%$query%") // on entoure la requête de % pour le LIKE (recherche partielle)
+            ->getQuery() // on prépare la requête
+            ->getResult(); // on exécute et on récupère les résultats
+
+        // On envoie les résultats à la vue Twig 'montre/recherche.html.twig'
+        // On transmet la liste des montres trouvées et la valeur recherchée pour éventuellement l'afficher
+        return $this->render('montre/recherche.html.twig', [
+            'montres' => $montres,
+            'query' => $query
+        ]);
+    }
 }

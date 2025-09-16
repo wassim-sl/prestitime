@@ -18,7 +18,7 @@
 				</li>
 
 				<li class="nav-item">
-					<a class="nav-link fst-italic" href="">Compte</a>
+					<a class="nav-link fst-italic" href="{{ path('app_edit_compte') }}">Compte</a>
 				</li>
 				<li class="nav-item">
 					<a class="nav-link fst-italic" href="{{ path('app_panier_index') }}">Panier</a>
@@ -34,7 +34,7 @@
 						</a>
 						<ul class="dropdown-menu dropdown-menu-end">
 							<li>
-								<a class="dropdown-item" href="#">Mon compte</a>
+								<a class="dropdown-item" href="{{ path('app_edit_compte') }}">Mon compte</a>
 							</li>
 
 							{% if is_granted ('ROLE_ADMIN') %}
