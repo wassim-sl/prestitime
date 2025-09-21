@@ -25,7 +25,8 @@ class MontreType extends AbstractType
                 'class' => Marque::class,
                 'choice_label' => 'nom',
                 'placeholder' => 'choisir la marque du montre',
-                'label' => 'Marque ',
+                'label' => 'Marque<span class="text-danger">*</span>',
+                'label_html' => true,
                 'label_attr' => ['class' => 'form-label fw-bold text-dark'],
                 'attr' => ['class' => 'form-select'],
 
@@ -101,13 +102,14 @@ class MontreType extends AbstractType
             ])
 
             ->add('image', null, [
-                'label' => 'Image (URL ou nom de fichier)',
+                'label' => 'Image <span class="text-danger">*</span>',
+                'label_html' => true,
                 'label_attr' => ['class' => 'form-label fw-bold text-dark'],
                 'attr' => [
                     'placeholder' => 'Ex : montre1_img1.jpg',
                     'class' => 'form-control',
                 ],
-                'required' => false,
+                //'required' => false,
                 'row_attr' => ['class' => 'mb-4'],
             ])
             ->add('image2', null, [

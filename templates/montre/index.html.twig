@@ -5,15 +5,19 @@
 {% block main_banner %}{% endblock %}
 
 {% block body %}
-	<div class="container mt-5 mb-5">
-
+	<div style="max-width: 1400px; margin: auto; padding: 20px; margin-top:20px; background:rgba(255, 241, 241, 0.9); " class="card ">
 		<br>
-		<h1 class="text-center">Listes des montres</h1>
-
+		<h1 style="text-align: center; margin-bottom: 30px; color: rgba(209, 139, 139, 0.9);" class="text-center">
+			<strong>
+				Listes des montres
+			</strong>
+		</h1>
 		<br>
-		<a class="btn btn-dark" href="{{ path('app_montre_new') }}">Ajouter un produit</a><br><br>
+		<div style="">
+			<a style="max-width: 400px;" class=" btn btn-success" href="{{ path('app_montre_new') }}">Ajouter un produit</a><br><br>
+			<div/>
 
-		
+
 			<table class="table table-hover table-bordered align-middle ">
 				<thead class="table-dark">
 					<tr class="text-center">
@@ -36,10 +40,8 @@
 							<td>{{ montre.marque }}</td>
 							<td>{{ montre.description }}</td>
 							<td>{{ montre.prix }}</td>
-							<td>{{ montre.image }}</td>
 							<td>
-								{% if montre.isActive %}
-									<span style="color: green;">⬤</span>
+								<img⬤</span src="{{ asset('images/photos_montres/'~montre.image) }}" style="width:90px;height:90px;object-fit:cover;border-radius:6px" </td> <td> {% if montre.isActive %} <span style="color: green;">>
 								{% else %}
 									<span style="color: red;">⬤</span>
 
@@ -71,6 +73,6 @@
 					{% endfor %}
 				</tbody>
 			</table>
-		
-	</div>
-{% endblock %}
+
+		</div>
+	{% endblock %}
