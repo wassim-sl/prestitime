@@ -4,7 +4,6 @@ namespace App\Service;                                        // Espace de noms 
 
 use App\Entity\Montre;                                       // On va manipuler l'entité Montre (pour charger les infos depuis la BDD)
 use Doctrine\ORM\EntityManagerInterface;                     // Pour accéder au repository (find par id)
-use Symfony\Component\BrowserKit\Request;
 use Symfony\Component\HttpFoundation\RequestStack;
 use Symfony\Component\HttpFoundation\Session\SessionInterface; // Pour lire/écrire dans la session
 

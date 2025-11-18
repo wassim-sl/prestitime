@@ -1,5 +1,6 @@
 body {
     font-family: Arial, sans-serif;
+        
 }
 
 .watch-card img {
@@ -24,13 +25,13 @@ input::placeholder {
 
 .watch-card {
     transition: transform 0.3s, box-shadow 0.3s;
-    box-shadow: 0 8px 8px  rgba(246, 4, 4, 0.669);
+    box-shadow: 0 8px 8px  rgba(241, 193, 145, 0.86);
     border-radius: 12px;
 }
 
 .watch-card:hover {
     transform: translateY(-5px);
-    box-shadow: 0 12px 20px rgba(184, 7, 7, 0.676);
+    box-shadow: 0 12px 20px rgba(241, 193, 145, 0.86);
 }
 footer {
     background-color: #f8f9fa;
@@ -47,32 +48,20 @@ footer h5 {
 
 
 
-.navbar {
-    height: 100px;
-    padding-top: 0;
-    padding-bottom: 0;
-    display: flex;
-    align-items: center;
-    position: relative;
-    z-index: 2;
-}
-.brand-logo {
-    max-height: 130px;
-    height: auto;
-    width: auto;
-    display: block;
-}
+.navbar{ height:110px; padding:0; overflow:visible; }        /* barre fine et fixe */
+.navbar .container{ height:100%; display:flex; align-items:center; } /* centrer le contenu */
+.navbar-brand img{ height:150px; width:auto; }               /* logo grand (ajuste 90px) */
 
-
-<img src="{{ asset('images/photos_montres/' ~ montre.image) }}" alt="Montre {{ montre.marque }}" style="max-width:200px; height:auto;">
-				<img src="{{ asset('images/photos_montres/' ~ montre.image2) }}" alt="Montre {{ montre.marque }}" style="max-width:200px; height:auto;">
-				<img src="{{ asset('images/photos_montres/' ~ montre.image3) }}" alt="Montre {{ montre.marque }}" style="max-width:200px; height:auto;">
+   
 
 
 
 
 
-/*--requête média elle signifie que les styles à l’intérieur ne s’appliqueront que si la largeur de l’écran est inférieure ou égale à 576 pixels--*/
+
+
+
+/*--requête média : les styles à l’intérieur ne s’appliqueront que si la largeur de l’écran est inférieure ou égale à 768 pixels--*/
 @media (max-width: 768px) {
     h6.card-title {
         font-size: 1rem; /*--définit leur taille de police à 1rem  ( ce qui correspond à environ 16 pixels par défaut )--*/

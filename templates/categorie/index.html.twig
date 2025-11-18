@@ -5,12 +5,16 @@
 {% block main_banner %}{% endblock %}
 
 {% block body %}
-<div class="container mt-5 mb-5">
+	<div style="max-width: 1400px; margin: auto; padding: 20px; margin-top:20px; background:rgba(246, 216, 186, 0.63); " class="card ">
 
 	<br>
-		<h1 class="text-center ">Liste des catégories</h1><br>
+		<h1 style="text-align: center; margin-bottom: 30px; color:rgba(204, 138, 73, 0.86)" class="text-center">
+			<strong>
+				Liste des catégories
+			</strong>
+		</h1>
 
-	<a class="btn btn-dark" href="{{ path('app_categorie_new') }}">Ajouter une categorie</a><br><br>
+	<div ><a class="btn btn-dark" href="{{ path('app_categorie_new') }}">Ajouter une categorie</a><div/><br>
 
 	<table class="table table-hover table-bordered align-middle">
 		<thead class="table-dark">
@@ -49,5 +53,7 @@
         {% endfor %}
         </tbody>
     </table>
+	<a href="javascript:history.back()" style="margin-right: 10px; text-decoration: none; padding: 8px 12px; background: #6c757d; color: #fff; border-radius: 4px;">
+						Retour</a>
 </div>
 {% endblock %}

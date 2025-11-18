@@ -22,30 +22,45 @@ final class MontreController extends AbstractController
         ]);
     }
 
-    #[Route('/admin/new', name: 'app_montre_new', methods: ['GET', 'POST'])]
-    public function new(Request $request, EntityManagerInterface $entityManager): Response
-    {
-        $montre = new Montre();
-        $form = $this->createForm(MontreType::class, $montre);
-        $form->handleRequest($request);
+    // Route pour ajouter une nouvelle montre dans l’espace administrateur
+#[Route('/admin/new', name: 'app_montre_new', methods: ['GET', 'POST'])]
+public function new(Request $request, EntityManagerInterface $entityManager): Response
+{
+    // Création d’un nouvel objet Montre
+    $montre = new Montre();
 
-        if ($form->isSubmitted() && $form->isValid()) {
-            $entityManager->persist($montre);
-            $entityManager->flush();
-            $this->addFlash('success', 'La montre "' . $montre->getmarque()->getNom() . '" a bien été ajouté');
+    // Création du formulaire à partir de la classe MontreType
+    $form = $this->createForm(MontreType::class, $montre);
 
+    // Récupération des données envoyées via le formulaire
+    $form->handleRequest($request);
 
-            return $this->redirectToRoute('app_montre_index', [], Response::HTTP_SEE_OTHER);
-        }
-        if ($form->isSubmitted() && !$form->isValid()) {
-            $this->addFlash('error', 'Action refusée : veuillez remplir tous les champs du formulaire ! ');
-        }
+    // Vérification si le formulaire est soumis et valide
+    if ($form->isSubmitted() && $form->isValid()) {
+        // Enregistrement de la montre dans la base de données
+        $entityManager->persist($montre);
+        $entityManager->flush();
 
-        return $this->render('montre/new.html.twig', [
-            'montre' => $montre,
-            'form' => $form,
-        ]);
+        // Message de confirmation à l’utilisateur
+        $this->addFlash('success', 'La montre "' . $montre->getmarque()->getNom() . '" a bien été ajoutée.');
+
+        // Redirection vers la liste des montres
+        return $this->redirectToRoute('app_montre_index', [], Response::HTTP_SEE_OTHER);
     }
+
+    // Si le formulaire est soumis mais invalide
+    if ($form->isSubmitted() && !$form->isValid()) {
+        // Message d’erreur à l’utilisateur
+        $this->addFlash('error', 'Action refusée : veuillez remplir tous les champs du formulaire !');
+    }
+
+    // Affichage du formulaire dans la vue Twig
+    return $this->render('montre/new.html.twig', [
+        'montre' => $montre,
+        'form' => $form,
+    ]);
+}
+
 
     #[Route('/{id}', name: 'app_montre_show', requirements: ['id' => '\d+'], methods: ['GET'])]
     public function show(Montre $montre): Response
@@ -84,6 +99,7 @@ final class MontreController extends AbstractController
 
         return $this->redirectToRoute('app_montre_index', [], Response::HTTP_SEE_OTHER);
     }
+
     #[Route('/admin/montre/{id}/toggle', name: 'montre_toggle')]
     public function toggle(Montre $montre, EntityManagerInterface $em): Response
     {
@@ -122,4 +138,50 @@ final class MontreController extends AbstractController
             'query'   => $query,
         ]);
     }
+    // src/Controller/MontreController.php
+
+    #[Route('/homme', name: 'homme')]
+    public function homme(MontreRepository $repo): Response
+    {
+        $montres = $repo->createQueryBuilder('m')
+            ->join('m.categorie', 'c')          // si m.categorie est une relation vers Categorie
+            ->andWhere('LOWER(c.nom) = :nom')
+            ->setParameter('nom', 'Montre homme') // valeur EXACTE en BDD (insensible à la casse)
+            ->orderBy('m.id', 'ASC')
+            ->getQuery()->getResult();
+
+        return $this->render('montre/index.html.twig', [
+            'montres' => $montres,
+            'filtre'  => 'Montres homme',
+        ]);
+    }
+
+   
+
+    #[Route('/categorie/{slug}', name: 'categorie')] // /montre/categorie/homme|femme
+    public function categorie(MontreRepository $repo, string $slug): Response
+    {
+        // slug attendu : "homme" ou "femme"
+        $needle = $slug === 'homme' ? 'montre homme' : 'montre femme';
+
+        // Si m.categorie est une RELATION vers Categorie:
+        $montres = $repo->createQueryBuilder('m')
+            ->join('m.categorie', 'c')
+            ->andWhere('LOWER(c.nom) = :nom')
+            ->setParameter('nom', $needle)
+            ->orderBy('m.id', 'ASC')
+            ->getQuery()->getResult();
+
+        // (Si c’est un champ texte: remplace le join par ->andWhere('LOWER(m.categorie) = :nom'))
+
+        $title = $slug === 'homme' ? 'Montres Homme' : 'Montres Femme';
+
+        return $this->render('montre/categorie.html.twig', [
+            'montres' => $montres,
+            'title'   => $title,
+        ]);
+    }
+
+    
+
 }
