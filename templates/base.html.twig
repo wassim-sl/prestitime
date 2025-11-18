@@ -19,29 +19,47 @@
 		{{ encore_entry_link_tags('app') }}
 
 	</head>
-	<body style="background-color: rgba(243, 243, 243, 1); height: 0px">
+	<body style="background-color: rgba(255, 255, 255, 1); height: 0px">
 
 		{% block navbar %}
 			{% include "_include/_nav.html.twig" %}
 		{% endblock %}
 
 		{% block main_banner %}
+<!-- Barre de recherche + Bouton filtre alignés -->
+<div class="banner-search text-center my-4 fw-bold fst-italic">
+    <h1 id="titre" style="color: rgba(214, 161, 108, 0.86);"></h1>
 
-			<!-- Barre de recherche -->
-			<div class="text-center my-4 fw-bold fst-italic">
-				<h1 id="titre" style="color: rgba(210, 133, 133, 1)"></h1>
+    <form method="get" action="{{ path('recherche') }}" class="mt-3 d-flex justify-content-center align-items-center gap-2">
+        
+        <!-- 🔹 Bouton filtre à gauche -->
+        <div class="dropdown">
+            <button class="btn  dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" style="background-color:  rgba(241, 193, 145, 0.86);">
+                Catégories
+            </button>
+            <ul class="dropdown-menu text-center">
+                <li>
+                    <a class="dropdown-item" href="{{ path('categorie', {'slug': 'homme'}) }}">
+                        <i class="bi bi-watch"></i> Montres Homme
+                    </a>
+                </li>
+                <li>
+                    <a class="dropdown-item" href="{{ path('categorie', {'slug': 'femme'}) }}">
+                        <i class="bi bi-gem"></i> Montres Femme
+                    </a>
+                </li>
+            </ul>
+        </div>
 
-				<form method="get" action="{{ path('recherche') }}" class="mt-3">
-					<div class="input-group w-50 mx-auto">
-						<input type="text" name="q" class="form-control text-center" placeholder="Rechercher une montre">
-
-						<button type="submit" class="btn " style="background-color: rgba(255, 187, 187, 1)">
-							<i class="bi bi-search"></i>
-							
-						</button>
-					</div>
-				</form>
-			</div>
+        <!-- 🔹 Barre de recherche -->
+        <div class="input-group w-50">
+            <input type="text" name="q" class="form-control text-center" placeholder="Rechercher une montre">
+            <button type="submit" class="z-0 btn search-btn" style="background-color:rgba(241, 193, 145, 0.86);">
+                <i class="bi bi-search"></i>
+            </button>
+        </div>
+    </form>
+</div>
 
 
 			<!-- Banieres -->

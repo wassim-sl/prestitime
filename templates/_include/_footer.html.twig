@@ -16,12 +16,13 @@
 
 			<div class="col-md-4 mb-4">
 				<h5>Catégories</h5>
+				
 				<ul class="list-unstyled">
 					<li>
-						<a href="" class="text-decoration-none text-dark">Montres homme</a>
+						<a href="{{ path('categorie', {'slug': 'homme'}) }}" class="text-decoration-none text-dark">Montres homme</a>
 					</li>
 					<li>
-						<a href="" class="text-decoration-none text-dark">Montres femme</a>
+						<a href="{{ path('categorie', {'slug': 'femme'}) }}" class="text-decoration-none text-dark">Montres femme</a>
 					</li>
 				</ul>
 			</div>
@@ -39,8 +40,8 @@
 		</div>
 		<hr/>
 		<div class="text-center pb-2">
-			
-				<p>&copy; 2025 Prestitime. Tous droits réservés.</p>
+
+			<p>&copy; 2025 Prestitime. Tous droits réservés.</p>
 			<a href="{{ path('app_mentions_legales') }}" class="text-dark mx-2">Mentions légales</a>
 			|
 			<a href="{{ path('app_cgu') }}" class="text-dark mx-2">CGU</a>

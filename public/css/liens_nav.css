@@ -8,6 +8,6 @@
   border-bottom: 2px solid transparent; /* ligne invisible */
 }
 .navbar .nav-link:hover {
-  color: #b53a5a; /* couleur au survol */
-  border-bottom: 2px solid #b53a5a; /* ligne visible au survol */
+  color: rgba(197, 108, 13, 0.86);; /* couleur au survol */
+  border-bottom: 2px solid  rgba(197, 108, 13, 0.86);; /* ligne visible au survol */
 }

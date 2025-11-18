@@ -39,7 +39,7 @@ Extra extra large	xxl	≥1400px
 
     /*--quand le menu est ouvert, mets un fond et de l’espace--*/
     .navbar-collapse {
-        background: rgba(249, 202, 202, 1);
+        background: rgba(241, 193, 145, 0.86);
         padding: 0.5rem 1rem;
         border-radius: 0.25rem;
     }

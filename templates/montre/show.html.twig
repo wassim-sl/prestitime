@@ -8,9 +8,9 @@
 
 {% block main_banner %}{% endblock %}
 {% block body %}
-	<div style="max-width: 900px; margin: auto; padding: 20px; margin-top:20px; background:rgba(255, 241, 241, 0.9); " class="card " ;>
+	<div style="max-width: 900px; margin: auto; padding: 20px; margin-top:20px; background:rgba(246, 216, 186, 0.63); " class="card " ;>
 		<br>
-		<h1 style="text-align: center; margin-bottom: 30px; color: rgba(209, 139, 139, 0.9);">
+		<h1 style="text-align: center; margin-bottom: 30px; color:rgba(214, 161, 108, 0.86);">
 			<strong>
 				{{ montre.marque }}
 				-
@@ -62,9 +62,11 @@
 					{% endif %}
 				</p>
 				<div style="margin-top: 20px;">
-					<a href="{{ path('app_home') }}" style="margin-right: 10px; text-decoration: none; padding: 8px 12px; background: #6c757d; color: #fff; border-radius: 4px;">
+					<a href="javascript:history.back()" style="margin-right: 10px; text-decoration: none; padding: 8px 12px; background: #6c757d; color: #fff; border-radius: 4px;">
 						Retour</a>
+					{% if is_granted('ROLE_USER') and not is_granted('ROLE_ADMIN') %}
 					<a href="{{ path('panier_ajouter', {id: montre.id}) }}" style="margin-right: 10px; text-decoration: none; padding: 8px 12px; background: #6c757d; color: #fff; border-radius: 4px;">Ajouté au panier</a>
+					{% endif %}
 
 				</div>
 			</div>

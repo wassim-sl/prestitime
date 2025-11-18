@@ -13,31 +13,42 @@ use Symfony\Component\Routing\Attribute\Route;
 
 class RegistrationController extends AbstractController
 {
-    #[Route('/inscription', name: 'app_register')]
-    public function register(Request $request, UserPasswordHasherInterface $userPasswordHasher, EntityManagerInterface $entityManager): Response
-    {
-        $user = new Client();
-        $form = $this->createForm(RegistrationFormType::class, $user);
-        $form->handleRequest($request);
+    // Route pour accéder à la page d'inscription (URL : /inscription)
+#[Route('/inscription', name: 'app_register')]
+public function register(Request $request, UserPasswordHasherInterface $userPasswordHasher, EntityManagerInterface $entityManager): Response
+{
+    // Création d'un nouvel utilisateur (Client)
+    $user = new Client();
 
-        if ($form->isSubmitted() && $form->isValid()) {
-            
-            /** @var string $plainPassword */
-            $plainPassword = $form->get('plainPassword')->getData();
+    // Création du formulaire d'inscription basé sur RegistrationFormType
+    $form = $this->createForm(RegistrationFormType::class, $user);
 
-            // encode the plain password
-            $user->setPassword($userPasswordHasher->hashPassword($user, $plainPassword));
+    // Récupération et traitement des données envoyées par le formulaire
+    $form->handleRequest($request);
 
-            $entityManager->persist($user);
-            $entityManager->flush();
+    // Vérifie si le formulaire est soumis et valide
+    if ($form->isSubmitted() && $form->isValid()) {
 
-            // do anything else you need here, like send an email
+        // Récupération du mot de passe saisi en clair dans le formulaire
+        $plainPassword = $form->get('plainPassword')->getData();
 
-            return $this->redirectToRoute('app_login');
-        }
+        // Chiffrement (hachage) du mot de passe avant de l’enregistrer en base
+        $user->setPassword($userPasswordHasher->hashPassword($user, $plainPassword));
 
-        return $this->render('registration/register.html.twig', [
-            'registrationForm' => $form,
-        ]);
+        // Prépare l’enregistrement du nouvel utilisateur dans la base de données
+        $entityManager->persist($user);
+
+        // Exécute la requête d’insertion (sauvegarde dans la base)
+        $entityManager->flush();
+
+        // Redirige l’utilisateur vers la page de connexion après l’inscription
+        return $this->redirectToRoute('app_login');
     }
+
+    // Affiche la page d'inscription avec le formulaire (si non soumis ou invalide)
+    return $this->render('registration/register.html.twig', [
+        'registrationForm' => $form,
+    ]);
+}
+
 }

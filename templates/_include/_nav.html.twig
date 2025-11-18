@@ -1,7 +1,7 @@
-<nav class="navbar navbar-expand-md py-2 py-lg-3" style="background-color:  rgba(249, 185, 185, 0.9);">
+<nav class="navbar navbar-expand-md py-0" style="background-color:  rgba(241, 193, 145, 0.86);">
 	<div class="container">
-		<a class="navbar-brand d-flex align-items-center gap-2" href="{{ path('app_home') }}">
-			<img src="{{ asset('images/logo/logo.nav.png') }}" alt="Logo" height="80" class="brand-logo">
+		<a class="navbar-brand d-flex align-items-center " href="{{ path('app_home') }}">
+			<img src="{{ asset('images/logo/logo.nav.png') }}" alt="Logo" class="brand-logo">
 		</a>
 
 		<button class="navbar-toggler " type="button" data-bs-toggle="collapse" data-bs-target="#mainNav" aria-controls="mainNav" aria-expanded="false" aria-label="Toggle navigation">
@@ -16,13 +16,16 @@
 				<li class="nav-item">
 					<a class="nav-link fst-italic" href="{{ path('app_a_propos') }}">À propos</a>
 				</li>
-
-				<li class="nav-item">
-					<a class="nav-link fst-italic" href="{{ path('app_edit_compte') }}">Compte</a>
-				</li>
-				<li class="nav-item">
-					<a class="nav-link fst-italic" href="{{ path('app_panier_index') }}">Panier</a>
-				</li>
+				{% if is_granted('ROLE_USER') %}
+					<li class="nav-item">
+						<a class="nav-link fst-italic" href="{{ path('app_edit_compte') }}">Compte</a>
+					</li>
+				{% endif %}
+				{% if is_granted('ROLE_USER') and not is_granted('ROLE_ADMIN')%}
+					<li class="nav-item">
+						<a class="nav-link fst-italic" href="{{ path('app_panier_index') }}">Panier</a>
+					</li>
+				{% endif %}
 
 
 				{% if app.user %}

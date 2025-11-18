@@ -22,7 +22,7 @@ class MarqueType extends AbstractType
                 ],
                 'label' => 'Nom <span class="text-danger">*</span>',
                 'label_attr' => [
-                    'class' => 'fw-bold text-white'
+                    'class' => 'fw-bold text-black'
                 ],
                 'label_html' => true,
                 'help' => 'Saisissez une marque compris entre <span class="text-danger">2</span> et <span class="text-danger">20</span> caractères.',
