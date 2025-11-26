@@ -1,26 +1,38 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Catégorie{% endblock %}
+{% block title %}Catégorie
+{% endblock %}
 {% block main_banner %}{% endblock %}
 {% block body %}
-    <h1>Catégorie</h1>
+	<div style="max-width: 1400px; margin: auto; padding: 20px; margin-top:20px; background:rgba(246, 216, 186, 0.63); " class="card ">
 
-    <table class="table">
-        <tbody>
-            <tr>
-                <th>Identifiant</th>
-                <td>{{ categorie.id }}</td>
-            </tr>
-            <tr>
-                <th>Nom</th>
-                <td>{{ categorie.nom }}</td>
-            </tr>
-        </tbody>
-    </table>
+		<br>
+		<h1 style="text-align: center; margin-bottom: 30px; color:rgba(204, 138, 73, 0.86)" class="text-center">
+			<strong>
+				Catégorie
+			</strong>
+		</h1>
 
-    <a href="{{ path('app_categorie_index') }}">Retour à la liste</a>
+		<table class="table table-hover table-bordered align-middle">
+			<thead class="table-dark">
+				<tr class="text-center">
+					<th>Identifiant</th>
+					<th>Nom</th>
+				</tr>
+			</thead>
+			<tbody class="text-center">
+				<tr>
+					<td>{{ categorie.id }}</td>
+					<td>{{ categorie.nom }}</td>
+				</tr>
+			</tbody>
 
-    <a href="{{ path('app_categorie_edit', {'id': categorie.id}) }}">Modifier</a>
+		</table>
+		<div>
+			<a href="javascript:history.back()" style="margin-right: 10px; text-decoration: none; padding: 8px 12px; background: #6c757d; color: #fff; border-radius: 4px;">
+				Retour</a>
+		</div>
 
-    {{ include('categorie/_delete_form.html.twig') }}
+
+	</div>
 {% endblock %}

@@ -13,13 +13,43 @@ Extra extra large	xxl	≥1400px
 
 @media (max-width: 768px) {
     .navbar-collapse {
-        position: absolute;
+        position: re;
         top: 100%;
         left: 0;
         right: 0;
         z-index: 1;
-        background: #f8f9fa;
         padding: 0.5rem 1rem;
+    }
+    .navbar-brand img{ 
+        height:120px; 
+        width:auto; 
+    }
+}
+
+@media (max-width: 320px) {
+    .navbar-brand img{ height:110px; width:auto; }               
+    .navbar-collapse {
+        background: rgb(226, 175, 124);
+        padding: 0.5rem 1rem;
+        border-radius: 0.25rem;
+    }
+}
+
+@media (max-width: 375px) {
+    .navbar-brand img{ height:110px; width:auto; }               
+    .navbar-collapse {
+        background: rgb(226, 175, 124);
+        padding: 0.5rem 1rem;
+        border-radius: 0.25rem;
+    }
+}
+
+@media (max-width: 428px) {
+    .navbar-brand img{ height:110px; width:auto; }              
+    .navbar-collapse {
+        background: rgb(226, 175, 124);
+        padding: 0.5rem 1rem;
+        border-radius: 0.25rem;
     }
 }
 
@@ -32,14 +62,11 @@ Extra extra large	xxl	≥1400px
         padding-bottom: 0.25rem;
     }
 
-    /*--logo un peu plus petit--*/
-    .brand-logo {
-        height: 80px;
-    }
+   
 
     /*--quand le menu est ouvert, mets un fond et de l’espace--*/
     .navbar-collapse {
-        background: rgba(241, 193, 145, 0.86);
+        
         padding: 0.5rem 1rem;
         border-radius: 0.25rem;
     }
